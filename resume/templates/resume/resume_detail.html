@@ -4,22 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume Detail</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     <h1>{{ resume.first_name }} {{ resume.last_name }}</h1>
+
+    <!-- Кнопка для повернення до списку резюме -->
+    <a href="{% url 'resume:resume_list' %}">
+        <button class="styled-button" type="button">Back to Resume List</button>
+    </a>
+
     <p><strong>Email:</strong> {{ resume.email }}</p>
     <p><strong>Phone:</strong> {{ resume.phone_number }}</p>
     <p><strong>Address:</strong> {{ resume.address }}</p>
-    <p><strong>About Me:</strong> {{ resume.about_me }}</p>
-    <p><strong>Skills:</strong> {{ resume.skills }}</p>
+    <p><strong>About Me:</strong> {% if resume.about_me %}{{ resume.about_me }}{% else %}<em>No data available</em>{% endif %}</p>
+    <p><strong>Skills:</strong> {% if resume.skills %}{{ resume.skills }}{% else %}<em>No skills listed</em>{% endif %}</p>
     <p><strong>Job Title:</strong> {{ resume.job_title }}</p>
     <p><strong>Company:</strong> {{ resume.company_name }}</p>
     <p><strong>Job Description:</strong> {{ resume.job_description }}</p>
-    <p><strong>Work Period:</strong> {{ resume.start_date }} - {{ resume.end_date }}</p>
+    <p><strong>Work Period:</strong> {{ resume.start_date|date:"F j, Y" }} - {{ resume.end_date|date:"F j, Y" }}</p>
     <p><strong>Education Degree:</strong> {{ resume.education_degree }}</p>
     <p><strong>Institution:</strong> {{ resume.institution_name }}</p>
-    <p><strong>Graduation Date:</strong> {{ resume.graduation_date }}</p>
-    <p><strong>Created on:</strong> {{ resume.date_created }}</p>
-    <a href="{% url 'resume:resume_list' %}">Back to Resume List</a>
+    <p><strong>Graduation Date:</strong> {{ resume.graduation_date|date:"F j, Y" }}</p>
+    <p><strong>Created on:</strong> {{ resume.date_created|date:"F j, Y, g:i a" }}</p>
 </body>
 </html>

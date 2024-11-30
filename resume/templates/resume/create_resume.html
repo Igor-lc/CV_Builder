@@ -3,14 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
     <title>Create Resume</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     <h1>Create Resume</h1>
+
+    <!-- Кнопка для повернення до списку резюме -->
+    <a href="{% url 'resume:resume_list' %}">
+        <button class="styled-button" type="button">Back to Resume List</button>
+    </a>
+
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Create Resume</button>
+        <button class="styled-button" type="submit">Create Resume</button>
     </form>
 </body>
 </html>

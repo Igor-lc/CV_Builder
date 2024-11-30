@@ -1,0 +1,59 @@
+/* Стилізація всіх кнопок з класом .styled-button */
+.styled-button {
+    background-color: #4CAF50; /* Зелений фон */
+    color: white;              /* Білий текст */
+    padding: 10px 20px;        /* Відступи */
+    border: none;              /* Без рамки */
+    border-radius: 5px;        /* Круглі краї */
+    cursor: pointer;          /* Вказівник при наведенні */
+    text-align: center;        /* Центрування тексту */
+    display: inline-block;     /* Щоб кнопка не займала весь рядок */
+}
+
+.styled-button:hover {
+    background-color: #45a049; /* Темніший зелений при наведенні */
+}
+
+/* Інші стилі, щоб загальний вигляд був гармонійним */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #fff;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.resume-details p {
+    margin: 5px 0;
+}
