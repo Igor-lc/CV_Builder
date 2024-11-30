@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume List</title>
+</head>
+<body>
+    <h1>Resume List</h1>
+    <ul>
+        {% for resume in resumes %}
+            <li>
+                <a href="{% url 'resume:resume_detail' resume.pk %}">
+                    <strong>{{ resume.first_name }} {{ resume.last_name }}</strong>
+                    {% if resume.job_title %}
+                        - {{ resume.job_title }}
+                    {% else %}
+                        - <em>No job title provided</em>
+                    {% endif %}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
