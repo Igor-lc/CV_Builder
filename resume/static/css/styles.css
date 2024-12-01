@@ -35,6 +35,7 @@ form textarea {
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 14px;
+    box-sizing: border-box; /* Враховує padding та border */
 }
 
 /* Загальні стилі для сторінок */
@@ -97,4 +98,20 @@ a {
 
 a:hover {
     color: #0056b3;
+}
+
+/* Поля форми, що додаються до резюме */
+.formset-item {
+    margin-bottom: 15px;
+    width: 100%;
+    box-sizing: border-box; /* Щоб форми не виходили за межі */
+}
+
+.form-actions {
+    margin-top: 10px;
+}
+
+/* Чекбокси в секції видалення */
+input[type="checkbox"] {
+    margin-right: 10px;
 }

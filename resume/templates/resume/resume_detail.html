@@ -13,7 +13,7 @@
     <div class="container">
         <h1>{{ resume.first_name }} {{ resume.last_name }}</h1>
 
-        <!-- Кнопки навігації -->
+        <!-- Navigation buttons -->
         <div class="navigation-buttons">
             <a href="{% url 'resume:resume_list' %}" class="styled-button">
                 Back to Resume List
@@ -26,7 +26,7 @@
             </a>
         </div>
 
-        <!-- Деталі резюме -->
+        <!-- Resume details -->
         <div class="resume-details">
             <p><strong>Email:</strong> {{ resume.email }}</p>
             <p><strong>Phone:</strong> {{ resume.phone_number }}</p>
@@ -50,6 +50,28 @@
             <p><strong>Graduation Date:</strong> {{ resume.graduation_date|date:"F j, Y" }}</p>
             <p><strong>Created on:</strong> {{ resume.date_created|date:"F j, Y, g:i a" }}</p>
         </div>
+
+        <!-- Work Experience Section -->
+        <h2>Work Experience</h2>
+        {% if resume.work_experiences.all %}
+            {% for work in resume.work_experiences.all %}
+                <div class="work-experience">
+                    <h3>{{ work.job_title }} at {{ work.company_name }}</h3>
+                    <p>{{ work.job_description }}</p>
+                    <p>Period:
+                        {% if work.start_date and work.end_date %}
+                            {{ work.start_date|date:"F j, Y" }} - {{ work.end_date|date:"F j, Y" }}
+                        {% elif work.start_date %}
+                            {{ work.start_date|date:"F j, Y" }} - Present
+                        {% else %}
+                            <em>Not specified</em>
+                        {% endif %}
+                    </p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No work experience available.</p>
+        {% endif %}
     </div>
 </body>
 </html>

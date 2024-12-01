@@ -1,37 +1,65 @@
 <!-- resume/templates/resume/edit_resume.html -->
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Resume - {{ resume.first_name }} {{ resume.last_name }}</title>
+    <title>Edit Resume</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     <div class="container">
-        <h1>Edit Resume - {{ resume.first_name }} {{ resume.last_name }}</h1>
+        <h1>Edit Resume</h1>
 
         <!-- Кнопка для повернення до списку резюме -->
-        <a href="{% url 'resume:resume_list' %}" class="styled-button">
-            Back to Resume List
-        </a>
+        <a href="{% url 'resume:resume_list' %}" class="styled-button">Back to resume list</a>
 
-        <!-- Форма для редагування резюме -->
-        <form method="POST">
+        <!-- Форма редагування резюме -->
+        <form method="POST" class="form">
             {% csrf_token %}
-            {{ form.as_p }}
-            <div class="form-buttons">
-                <!-- Кнопка для збереження змін -->
-                <button class="styled-button" type="submit">Save Changes</button>
+            <fieldset>
+                <legend>Resume Information</legend>
+                {{ form.as_p }}
+            </fieldset>
 
-                <!-- Кнопка для скасування редагування -->
-                <a href="{% url 'resume:resume_detail' resume.pk %}" class="styled-button">
-                    Cancel
-                </a>
-            </div>
+            <!-- Динамічні форми досвіду роботи -->
+            <fieldset>
+                <legend>Work Experience</legend>
+                {{ work_experience_formset.management_form }}
+                {% for form in work_experience_formset %}
+                    <div class="formset-item">
+                        {{ form.as_p }}
+                        <label>
+                            <input type="checkbox" name="delete_{{ form.instance.pk }}"> Delete
+                        </label>
+                    </div>
+                {% endfor %}
+
+                <!-- Кнопка для додавання нового досвіду роботи -->
+                <button type="button" id="add-work-experience" class="styled-button">Add Work Experience</button>
+            </fieldset>
+
+            <button class="styled-button" type="submit">Save Changes</button>
         </form>
     </div>
+
+    <script>
+        document.getElementById('add-work-experience').addEventListener('click', function() {
+            var formset = document.getElementById('id_workexperience_set');
+            var totalForms = document.getElementById('id_workexperience_set-TOTAL_FORMS');
+            var currentFormCount = parseInt(totalForms.value);
+
+            var newForm = formset.children[0].cloneNode(true);
+            newForm.querySelectorAll('input, textarea').forEach(input => input.value = '');
+
+            // Оновлення індексів форми
+            var regex = new RegExp('(-__prefix__-)', 'g');
+            newForm.innerHTML = newForm.innerHTML.replace(regex, '-' + currentFormCount + '-');
+
+            formset.appendChild(newForm);
+            totalForms.value = currentFormCount + 1;
+        });
+    </script>
 </body>
 </html>

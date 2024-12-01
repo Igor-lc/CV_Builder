@@ -1,4 +1,5 @@
 # resume/forms.py
+# Форми для роботи з моделями Resume та WorkExperience.
 
 from django import forms
 from django.forms import inlineformset_factory
@@ -6,6 +7,9 @@ from .models import Resume, WorkExperience
 
 
 class ResumeForm(forms.ModelForm):
+    """
+    Форма для створення та редагування основних даних резюме.
+    """
     class Meta:
         model = Resume
         fields = [
@@ -15,11 +19,11 @@ class ResumeForm(forms.ModelForm):
         ]
 
 
-# Динамічна форма для досвідів роботи
+# Форма для роботи з досвідом роботи (inline formset)
 WorkExperienceFormSet = inlineformset_factory(
-    Resume,  # Пов'язана модель
+    Resume,  # Модель, до якої прив'язано formset
     WorkExperience,  # Модель досвіду роботи
     fields=['job_title', 'company_name', 'job_description', 'start_date', 'end_date'],
-    extra=1,  # Додаткова порожня форма
-    can_delete=True  # Можливість видаляти записи
+    extra=1,  # Кількість додаткових порожніх форм
+    can_delete=True  # Можливість видалення записів
 )

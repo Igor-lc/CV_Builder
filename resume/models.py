@@ -1,9 +1,13 @@
 # resume/models.py
+# Моделі для зберігання даних резюме та досвіду роботи.
 
 from django.db import models
 
 
 class Resume(models.Model):
+    """
+    Модель для зберігання основних даних про резюме.
+    """
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
@@ -22,6 +26,9 @@ class Resume(models.Model):
 
 
 class WorkExperience(models.Model):
+    """
+    Модель для зберігання досвіду роботи, пов'язаного з резюме.
+    """
     resume = models.ForeignKey(Resume, related_name="work_experiences", on_delete=models.CASCADE)
     job_title = models.CharField(max_length=100)
     company_name = models.CharField(max_length=100)
