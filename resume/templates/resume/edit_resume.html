@@ -1,0 +1,37 @@
+<!-- resume/templates/resume/edit_resume.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Resume - {{ resume.first_name }} {{ resume.last_name }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Resume - {{ resume.first_name }} {{ resume.last_name }}</h1>
+
+        <!-- Кнопка для повернення до списку резюме -->
+        <a href="{% url 'resume:resume_list' %}" class="styled-button">
+            Back to Resume List
+        </a>
+
+        <!-- Форма для редагування резюме -->
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="form-buttons">
+                <!-- Кнопка для збереження змін -->
+                <button class="styled-button" type="submit">Save Changes</button>
+
+                <!-- Кнопка для скасування редагування -->
+                <a href="{% url 'resume:resume_detail' resume.pk %}" class="styled-button">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

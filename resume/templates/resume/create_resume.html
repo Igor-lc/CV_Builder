@@ -1,25 +1,31 @@
+<!-- resume/templates/resume/create_resume.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% load static %}
     <title>Create Resume</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <h1>Create Resume</h1>
+    <div class="container">
+        <h1>Create Resume</h1>
 
-    <!-- Кнопка для повернення до списку резюме -->
-    <a href="{% url 'resume:resume_list' %}">
-        <button class="styled-button" type="button">Back to Resume List</button>
-    </a>
+        <!-- Кнопка для повернення до списку резюме -->
+        <a href="{% url 'resume:resume_list' %}" class="styled-button">
+            Back to Resume List
+        </a>
 
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="styled-button" type="submit">Create Resume</button>
-    </form>
+        <!-- Форма створення резюме -->
+        <form method="POST" class="form">
+            {% csrf_token %}
+            <fieldset>
+                {{ form.as_p }}
+            </fieldset>
+            <button class="styled-button" type="submit">Create Resume</button>
+        </form>
+    </div>
 </body>
 </html>

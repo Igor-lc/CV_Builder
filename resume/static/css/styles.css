@@ -1,3 +1,7 @@
+/* styles.css */
+
+/* Повна адреса файлу: static/css/styles.css */
+
 /* Стилізація всіх кнопок з класом .styled-button */
 .styled-button {
     background-color: #4CAF50; /* Зелений фон */
@@ -5,16 +9,35 @@
     padding: 10px 20px;        /* Відступи */
     border: none;              /* Без рамки */
     border-radius: 5px;        /* Круглі краї */
-    cursor: pointer;          /* Вказівник при наведенні */
+    cursor: pointer;           /* Вказівник при наведенні */
     text-align: center;        /* Центрування тексту */
     display: inline-block;     /* Щоб кнопка не займала весь рядок */
+    transition: background-color 0.3s ease; /* Плавний перехід кольору */
 }
 
 .styled-button:hover {
     background-color: #45a049; /* Темніший зелений при наведенні */
 }
 
-/* Інші стилі, щоб загальний вигляд був гармонійним */
+/* Уніфікований стиль для всіх форм */
+form {
+    margin-bottom: 20px;
+}
+
+/* Стиль полів форми */
+form input[type="text"],
+form input[type="email"],
+form input[type="date"],
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Загальні стилі для сторінок */
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
@@ -34,7 +57,7 @@ ul {
 
 li {
     background-color: #fff;
-    margin: 10px;
+    margin: 10px 0;
     padding: 10px;
     border: 1px solid #ddd;
 }
@@ -48,12 +71,30 @@ a:hover {
     text-decoration: underline;
 }
 
+/* Контейнер для вирівнювання контенту */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
 }
 
+/* Стилі для секцій резюме */
 .resume-details p {
     margin: 5px 0;
+}
+
+/* Стиль заголовків в резюме */
+.resume-details h2 {
+    color: #4CAF50;
+    margin-top: 20px;
+    font-size: 1.5em;
+}
+
+/* Плавний перехід кольорів для лінків */
+a {
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #0056b3;
 }

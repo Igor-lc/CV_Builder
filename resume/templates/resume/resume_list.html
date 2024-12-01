@@ -1,3 +1,5 @@
+<!-- resume/templates/resume/resume_list.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,26 +10,34 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <h1>Resume List</h1>
+    <div class="container">
+        <h1>Resume List</h1>
 
-    <!-- Форма для створення нового резюме -->
-    <form action="{% url 'resume:create_resume' %}" method="get">
-        <button class="styled-button" type="submit">Create New Resume</button>
-    </form>
+        <!-- Кнопка для створення нового резюме -->
+        <a href="{% url 'resume:create_resume' %}" class="styled-button">
+            Create New Resume
+        </a>
 
-    <ul>
-        {% for resume in resumes %}
-            <li>
-                <a href="{% url 'resume:resume_detail' resume.pk %}">
-                    <strong>{{ resume.first_name }} {{ resume.last_name }}</strong>
-                    {% if resume.job_title %}
-                        - {{ resume.job_title }}
-                    {% else %}
-                        - <em>No job title provided</em>
-                    {% endif %}
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
+        <!-- Список резюме -->
+        <ul class="resume-list">
+            {% for resume in resumes %}
+                <li class="resume-item">
+                    <a href="{% url 'resume:resume_detail' resume.pk %}" class="resume-link">
+                        <strong>{{ resume.first_name }} {{ resume.last_name }}</strong>
+                        {% if resume.job_title %}
+                            - {{ resume.job_title }}
+                        {% else %}
+                            - <em>No job title provided</em>
+                        {% endif %}
+                    </a>
+                    <!-- Кнопки для редагування та видалення -->
+                    <div class="resume-actions">
+                        <a href="{% url 'resume:edit_resume' resume.pk %}" class="styled-button">Edit</a>
+                        <a href="{% url 'resume:delete_resume_confirmation' resume.pk %}" class="styled-button">Delete</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 </html>
